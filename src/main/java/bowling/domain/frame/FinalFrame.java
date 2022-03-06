@@ -50,12 +50,11 @@ public class FinalFrame implements Frame {
 
 	@Override
 	public boolean isNext() {
-		return !hasGameEnd();
+		return false;
 	}
 
 	@Override
 	public boolean hasGameEnd() {
-
 		if (bonusPin != null) {
 			return true;
 		}
