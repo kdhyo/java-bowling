@@ -4,6 +4,14 @@ import bowling.domain.Pins;
 
 public class Miss implements State {
 
+	private final Pins firstPins;
+	private final Pins secondPins;
+
+	public Miss(Pins firstPins, Pins secondPins) {
+		this.firstPins = firstPins;
+		this.secondPins = secondPins;
+	}
+
 	@Override
 	public State bowling(Pins pins) {
 		return null;

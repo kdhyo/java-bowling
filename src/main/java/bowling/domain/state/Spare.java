@@ -4,6 +4,12 @@ import bowling.domain.Pins;
 
 public class Spare implements State {
 
+	private final Pins pins;
+
+	public Spare(Pins pins) {
+		this.pins = pins;
+	}
+
 	@Override
 	public State bowling(Pins pins) {
 		return null;

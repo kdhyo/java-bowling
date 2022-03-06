@@ -14,7 +14,7 @@ public class StartState implements State {
 		if (pins.isStrike()) {
 			return new Strike();
 		}
-		return new NextState();
+		return new NextState(pins);
 	}
 
 	@Override
