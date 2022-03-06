@@ -12,7 +12,8 @@ public class PlayerTest {
 
 	@Test
 	void 생성_성공() {
-		assertThat(new Player("DHK")).isInstanceOf(Player.class);
+		Player player = new Player("DHK");
+		assertThat(player.getName()).isEqualTo("DHK");
 	}
 
 	@ParameterizedTest
