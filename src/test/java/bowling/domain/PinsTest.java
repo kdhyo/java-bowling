@@ -11,14 +11,14 @@ public class PinsTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 	void 생성_성공(int pins) {
-		assertThat(Pins.of(pins)).isInstanceOf(Pins.class);
+		assertThat(Pins.hit(pins)).isInstanceOf(Pins.class);
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, -2, 11, 12})
 	void 잘못된_핀_수(int pins) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> Pins.of(pins));
+			.isThrownBy(() -> Pins.hit(pins));
 	}
 
 }

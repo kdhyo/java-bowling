@@ -20,16 +20,16 @@ public class Pins {
 			.collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	public static Pins of(int pins) {
+	private Pins(int pins) {
+		this.pins = pins;
+	}
+
+	public static Pins hit(int pins) {
 		try {
 			return PINS.get(pins);
 		} catch (IndexOutOfBoundsException e) {
-			throw new IllegalArgumentException(String.format("핀의 수는 %d ~ %d 사이만 가능합니다.", MINIMUM_PIN_SIZE, MAXIMUM_PIN_SIZE));
+			throw new IllegalArgumentException(String.format("핀의 수는 %d ~ %d 사이만 쓰러트릴 수 있습니다.", MINIMUM_PIN_SIZE, MAXIMUM_PIN_SIZE));
 		}
-	}
-
-	private Pins(int pins) {
-		this.pins = pins;
 	}
 
 }
