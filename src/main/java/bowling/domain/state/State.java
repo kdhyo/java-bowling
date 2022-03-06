@@ -1,8 +1,10 @@
 package bowling.domain.state;
 
+import bowling.domain.Pins;
+
 public interface State {
 
-	State bowling(int pins);
+	State bowling(Pins pins);
 
 	boolean isCompleted();
 

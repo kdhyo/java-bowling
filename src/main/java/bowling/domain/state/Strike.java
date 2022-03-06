@@ -1,9 +1,11 @@
 package bowling.domain.state;
 
+import bowling.domain.Pins;
+
 public class Strike implements State {
 
 	@Override
-	public State bowling(int pins) {
+	public State bowling(Pins pins) {
 		return null;
 	}
 
