@@ -1,6 +1,9 @@
 package bowling.domain;
 
+import bowling.domain.frame.Frame;
 import bowling.domain.frame.Frames;
+import java.util.Collections;
+import java.util.List;
 
 public class Player {
 
@@ -17,12 +20,20 @@ public class Player {
 		return this;
 	}
 
+	public int currentRound() {
+		return frames.currentRound();
+	}
+
 	public boolean isNotGameEnd() {
 		return frames.isNotGameEnd();
 	}
 
 	public String getName() {
 		return name.getName();
+	}
+
+	public List<Frame> getFrame() {
+		return frames.getFrame();
 	}
 
 }
