@@ -4,7 +4,7 @@ import bowling.domain.Pins;
 
 public class StartState implements State {
 
-	private static final String FRAME_SCORE = "";
+	private static final String FRAME_SCORE_FORMAT = "";
 
 	public StartState() {
 	}
@@ -24,6 +24,6 @@ public class StartState implements State {
 
 	@Override
 	public String frameScore() {
-		return FRAME_SCORE;
+		return FRAME_SCORE_FORMAT;
 	}
 }

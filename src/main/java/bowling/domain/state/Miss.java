@@ -4,6 +4,8 @@ import bowling.domain.Pins;
 
 public class Miss implements State {
 
+	private static final String FRAME_SCORE_FORMAT = "%d|%d";
+
 	private final Pins firstPins;
 	private final Pins secondPins;
 
@@ -14,16 +16,16 @@ public class Miss implements State {
 
 	@Override
 	public State bowling(Pins pins) {
-		return null;
+		throw new RuntimeException("종료된 프레임 입니다. 새 프레임 혹은 새 게임을 시작해주세요.");
 	}
 
 	@Override
 	public boolean isCompleted() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public String frameScore() {
-		return null;
+		return String.format(FRAME_SCORE_FORMAT, firstPins.pins(), secondPins.pins());
 	}
 }
