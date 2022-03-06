@@ -24,7 +24,7 @@ class NextStateTest {
 
 	@Test
 	void 완료상태() {
-		assertThat(new StartState().isCompleted()).isFalse();
+		assertThat(new NextState(Pins.hit(1)).isCompleted()).isFalse();
 	}
 
 	@ParameterizedTest
