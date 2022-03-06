@@ -36,6 +36,10 @@ public class Pins {
 		return this.pins == MAXIMUM_PIN_SIZE;
 	}
 
+	public boolean isSpare(Pins secondPin) {
+		return this.pins + secondPin.pins == MAXIMUM_PIN_SIZE;
+	}
+
 	public Pins nextPins(int pins) {
 		if (isOverPins(pins)) {
 			throw new IllegalArgumentException(String.format("핀의 수는 %d ~ %d 사이만 쓰러트릴 수 있습니다.", MINIMUM_PIN_SIZE, MAXIMUM_PIN_SIZE));

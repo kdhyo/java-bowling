@@ -53,16 +53,21 @@ public class NormalFrame implements Frame {
 		throw new RuntimeException("다음 프레임으로 넘어갈 수 없습니다.");
 	}
 
+	@Override
+	public boolean isNext() {
+		return (firstPin != null && firstPin.isStrike()) || secondPin != null;
+	}
+
+	@Override
+	public boolean hasGameEnd() {
+		return false;
+	}
+
 	private Frame nextFrame(int nextRound) {
 		if (nextRound == LAST_ROUND) {
 			return new FinalFrame();
 		}
 		return new NormalFrame(nextRound);
-	}
-
-	@Override
-	public boolean isNext() {
-		return (firstPin != null && firstPin.isStrike()) || secondPin != null;
 	}
 
 }
