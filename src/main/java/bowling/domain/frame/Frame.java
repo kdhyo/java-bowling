@@ -4,7 +4,9 @@ import bowling.domain.Pins;
 
 public interface Frame {
 
-	Frame bowling(Pins pins);
+	Frame bowling(int pins);
+
+	Frame nextFrame();
 
 	boolean isNext();
 
