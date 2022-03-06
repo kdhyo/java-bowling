@@ -4,6 +4,8 @@ import bowling.domain.Pins;
 
 public class FinalFrame implements Frame {
 
+	private static final int ROUND = 10;
+
 	private final Pins firstPin;
 	private final Pins secondPin;
 	private final Pins bonusPin;
