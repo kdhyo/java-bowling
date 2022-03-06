@@ -13,5 +13,5 @@ public class FinalFrame implements Frame {
 	public boolean isNext() {
 		return false;
 	}
-	
+
 }
