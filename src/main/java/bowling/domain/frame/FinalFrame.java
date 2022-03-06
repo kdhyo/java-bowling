@@ -5,6 +5,7 @@ import bowling.domain.Pins;
 public class FinalFrame implements Frame {
 
 	private static final int ROUND = 10;
+	private static final String EMPTY = "";
 
 	private final Pins firstPin;
 	private final Pins secondPin;
@@ -70,6 +71,33 @@ public class FinalFrame implements Frame {
 		}
 
 		return false;
+	}
+
+	@Override
+	public String frameScore() {
+		if (firstPin != null && secondPin != null && bonusPin != null) {
+			StringBuilder sb = new StringBuilder();
+			if (firstPin.isSpare(secondPin)) {
+				sb.append(String.format("%d|/", firstPin.pins()));
+				if (bonusPin.isStrike()) {
+					sb.append("X");
+					return sb.toString();
+				}
+				sb.append(String.format("|%d", bonusPin.pins()));
+				return sb.toString();
+			}
+		}
+
+
+		if (firstPin == null) {
+			return EMPTY;
+		}
+
+		if (firstPin.isStrike()) {
+			return "X";
+		}
+
+		return null;
 	}
 
 }

@@ -10,4 +10,5 @@ public interface Frame {
 
 	boolean hasGameEnd();
 
+	String frameScore();
 }

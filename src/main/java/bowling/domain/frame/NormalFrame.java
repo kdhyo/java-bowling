@@ -6,6 +6,7 @@ public class NormalFrame implements Frame {
 
 	private static final int FIRST_ROUND = 1;
 	private static final int LAST_ROUND = 10;
+	private static final String EMPTY = "";
 
 	private final Pins firstPin;
 	private final Pins secondPin;
@@ -61,6 +62,23 @@ public class NormalFrame implements Frame {
 	@Override
 	public boolean hasGameEnd() {
 		return false;
+	}
+
+	@Override
+	public String frameScore() {
+		if (firstPin == null) {
+			return EMPTY;
+		}
+
+		if (firstPin.isStrike()) {
+			return "X";
+		}
+
+		if (firstPin.isSpare(secondPin)) {
+			return String.format("%d|/", firstPin.pins());
+		}
+
+		return String.format("%d|%d", firstPin.pins(), secondPin.pins());
 	}
 
 	private Frame nextFrame(int nextRound) {

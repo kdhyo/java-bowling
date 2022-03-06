@@ -1,8 +1,10 @@
 package bowling.domain.frame;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
+import java.util.List;
 
 public class Frames {
 
@@ -39,4 +41,9 @@ public class Frames {
 	public int currentRound() {
 		return frames.size();
 	}
+
+	public List<Frame> getFrame() {
+		return Collections.unmodifiableList(new ArrayList<>(frames));
+	}
+
 }
