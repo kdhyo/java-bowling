@@ -12,8 +12,17 @@ public class Player {
 		this.frames = new Frames();
 	}
 
+	public Player bowling(int pins) {
+		frames.bowling(pins);
+		return this;
+	}
+
+	public boolean isNotGameEnd() {
+		return frames.isNotGameEnd();
+	}
+
 	public String getName() {
-		return name.geName();
+		return name.getName();
 	}
 
 }

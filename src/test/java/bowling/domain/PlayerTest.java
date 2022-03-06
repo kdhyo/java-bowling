@@ -1,12 +1,8 @@
 package bowling.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class PlayerTest {
 
@@ -16,25 +12,30 @@ public class PlayerTest {
 		assertThat(player.getName()).isEqualTo("DHK");
 	}
 
-	@ParameterizedTest
-	@NullAndEmptySource
-	void 인수가_없는경우(String name) {
-		assertThatExceptionOfType(NullPointerException.class)
-			.isThrownBy(() -> new Player(name));
+	@Test
+	void 게임진행() {
+		Player player = new Player("DHK");
+
+		player.bowling(10);
+		player.bowling(5);
+		player.bowling(5);
+		player.bowling(8);
+		player.bowling(2);
+		player.bowling(0);
+		player.bowling(0);
+		player.bowling(10);
+		player.bowling(8);
+		player.bowling(0);
+		player.bowling(9);
+		player.bowling(1);
+		player.bowling(10);
+		player.bowling(10);
+		player.bowling(10);
+		player.bowling(10);
+		player.bowling(10);
+
+		assertThat(player.isNotGameEnd()).isFalse();
 	}
 
-	@ParameterizedTest
-	@ValueSource(strings = {"D", "DH"})
-	void 이름이_길이가_최소보다_작을경우(String name) {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> new Player(name));
-	}
-
-	@ParameterizedTest
-	@ValueSource(strings = {"SKTT1", "DONGHYO", "YOON"})
-	void 이름이_길이가_최대보다_클경우(String name) {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> new Player(name));
-	}
 
 }

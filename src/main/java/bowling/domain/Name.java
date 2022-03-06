@@ -11,7 +11,7 @@ public class Name {
 		this.name = name;
 	}
 
-	public String geName() {
+	public String getName() {
 		return name;
 	}
 
