@@ -15,7 +15,9 @@ public class NextState implements State {
 		if (this.pins.isSpare(pins)) {
 			return new Spare(this.pins);
 		}
-		return new Miss(this.pins, pins);
+
+		Pins nextPins = this.pins.nextPins(pins.pins());
+		return new Miss(this.pins, nextPins);
 	}
 
 	@Override

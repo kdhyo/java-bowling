@@ -1,32 +1,27 @@
 package bowling.domain.frame;
 
 import bowling.domain.Pins;
+import bowling.domain.state.StartState;
+import bowling.domain.state.State;
 
 public class NormalFrame implements Frame {
 
 	private static final int FIRST_ROUND = 1;
 	private static final int LAST_ROUND = 10;
-	private static final String EMPTY = "";
 
-	private final Pins firstPin;
-	private final Pins secondPin;
+	private final State state;
 	private final int round;
 
 	public static Frame start() {
-		return new NormalFrame(null, null, FIRST_ROUND);
+		return new NormalFrame(FIRST_ROUND);
 	}
 
-	private NormalFrame(int nextRound) {
-		this(null, null, nextRound);
+	private NormalFrame(int round) {
+		this(new StartState(), round);
 	}
 
-	private NormalFrame(Pins firstPin, int round) {
-		this(firstPin, null, round);
-	}
-
-	private NormalFrame(Pins firstPin, Pins secondPin, int round) {
-		this.firstPin = firstPin;
-		this.secondPin = secondPin;
+	private NormalFrame(State state, int round) {
+		this.state = state;
 		this.round = round;
 	}
 
@@ -36,12 +31,7 @@ public class NormalFrame implements Frame {
 			throw new RuntimeException("현재 프레임은 완료된 프레임 입니다.");
 		}
 
-		if (firstPin == null) {
-			return new NormalFrame(Pins.hit(pins), round);
-		}
-
-		Pins secondPins = firstPin.nextPins(pins);
-		return new NormalFrame(firstPin, secondPins, round);
+		return new NormalFrame(state.bowling(Pins.hit(pins)), round);
 	}
 
 	@Override
@@ -56,7 +46,7 @@ public class NormalFrame implements Frame {
 
 	@Override
 	public boolean isNext() {
-		return (firstPin != null && firstPin.isStrike()) || secondPin != null;
+		return state.isCompleted();
 	}
 
 	@Override
@@ -66,19 +56,7 @@ public class NormalFrame implements Frame {
 
 	@Override
 	public String frameScore() {
-		if (firstPin == null) {
-			return EMPTY;
-		}
-
-		if (firstPin.isStrike()) {
-			return "X";
-		}
-
-		if (firstPin.isSpare(secondPin)) {
-			return String.format("%d|/", firstPin.pins());
-		}
-
-		return String.format("%d|%d", firstPin.pins(), secondPin.pins());
+		return state.frameScore();
 	}
 
 	private Frame nextFrame(int nextRound) {
