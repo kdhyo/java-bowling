@@ -37,9 +37,14 @@ public class Pins {
 	}
 
 	public Pins nextPins(int pins) {
-		if (this.pins + pins > MAXIMUM_PIN_SIZE) {
+		if (isOverPins(pins)) {
 			throw new IllegalArgumentException(String.format("핀의 수는 %d ~ %d 사이만 쓰러트릴 수 있습니다.", MINIMUM_PIN_SIZE, MAXIMUM_PIN_SIZE));
 		}
 		return PINS.get(pins);
 	}
+
+	private boolean isOverPins(int pins) {
+		return this.pins + pins > MAXIMUM_PIN_SIZE;
+	}
+
 }
