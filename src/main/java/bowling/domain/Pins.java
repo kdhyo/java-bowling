@@ -48,7 +48,7 @@ public class Pins {
 	}
 
 	private boolean isOverPins(int pins) {
-		return this.pins + pins > MAXIMUM_PIN_SIZE;
+		return !this.isStrike() && this.pins + pins > MAXIMUM_PIN_SIZE;
 	}
 
 }
