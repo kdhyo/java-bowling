@@ -10,8 +10,15 @@ public class Miss implements State {
 	private final Pins secondPins;
 
 	public Miss(Pins firstPins, Pins secondPins) {
+		valid(firstPins, secondPins);
 		this.firstPins = firstPins;
 		this.secondPins = secondPins;
+	}
+
+	private void valid(Pins firstPins, Pins secondPins) {
+		if (firstPins.isStrike() || firstPins.isSpare(secondPins)) {
+			throw new IllegalArgumentException("올바르지 않은 점수 입니다.");
+		}
 	}
 
 	@Override

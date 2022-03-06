@@ -12,7 +12,7 @@ public class StartState implements State {
 	@Override
 	public State bowling(Pins pins) {
 		if (pins.isStrike()) {
-			return new Strike();
+			return Strike.strike(pins);
 		}
 		return new NextState(pins);
 	}
