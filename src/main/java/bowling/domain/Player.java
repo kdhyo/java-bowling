@@ -2,7 +2,6 @@ package bowling.domain;
 
 import bowling.domain.frame.Frame;
 import bowling.domain.frame.Frames;
-import java.util.Collections;
 import java.util.List;
 
 public class Player {

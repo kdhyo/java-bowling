@@ -19,7 +19,6 @@ public class BowlingGameApplication {
 			player = player.bowling(score);
 			ScoreBoard.view(player.getFrame(), player.getName());
 		}
-
 	}
 
 }
