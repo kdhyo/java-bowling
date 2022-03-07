@@ -16,7 +16,7 @@ public class NextState implements State {
 			return new Spare(this.pins);
 		}
 
-		Pins nextPins = this.pins.nextPins(pins.pins());
+		Pins nextPins = this.pins.nextPins(pins);
 		return new Miss(this.pins, nextPins);
 	}
 

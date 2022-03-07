@@ -25,14 +25,14 @@ public class PinsTest {
 	@Test
 	void 다음핀생성_성공() {
 		Pins pins = Pins.hit(5);
-		assertThat(pins.nextPins(5)).isInstanceOf(Pins.class);
+		assertThat(pins.nextPins(Pins.hit(5))).isInstanceOf(Pins.class);
 	}
 
 	@Test
 	void 다음핀생성_실패() {
 		Pins pins = Pins.hit(5);
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> pins.nextPins(6));
+			.isThrownBy(() -> pins.nextPins(Pins.hit(6)));
 	}
 
 }

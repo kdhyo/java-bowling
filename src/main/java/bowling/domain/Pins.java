@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.MIN;
 
 public class Pins {
 
 	private static final int MINIMUM_PIN_SIZE = 0;
 	private static final int MAXIMUM_PIN_SIZE = 10;
+	private static final String ZERO_PIN = "-";
 
 	private static final List<Pins> PINS;
 
@@ -40,11 +42,15 @@ public class Pins {
 		return this.pins + secondPin.pins == MAXIMUM_PIN_SIZE;
 	}
 
-	public int pins() {
-		return pins;
+	public String pins() {
+		if (pins == MINIMUM_PIN_SIZE) {
+			return ZERO_PIN;
+		}
+		return String.valueOf(pins);
 	}
 
-	public Pins nextPins(int pins) {
+	public Pins nextPins(Pins nextPins) {
+		int pins = nextPins.pins;
 		if (isOverPins(pins)) {
 			throw new IllegalArgumentException(String.format("핀의 수는 %d ~ %d 사이만 쓰러트릴 수 있습니다.", MINIMUM_PIN_SIZE, MAXIMUM_PIN_SIZE));
 		}

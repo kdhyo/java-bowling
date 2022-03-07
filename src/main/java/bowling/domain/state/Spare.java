@@ -4,7 +4,7 @@ import bowling.domain.Pins;
 
 public class Spare implements State {
 
-	private static final String FRAME_SCORE_FORMAT = "%d|/";
+	private static final String FRAME_SCORE_FORMAT = "%s|/";
 
 	private final Pins pins;
 

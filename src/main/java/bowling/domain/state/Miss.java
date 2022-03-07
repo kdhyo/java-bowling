@@ -4,7 +4,7 @@ import bowling.domain.Pins;
 
 public class Miss implements State {
 
-	private static final String FRAME_SCORE_FORMAT = "%d|%d";
+	private static final String FRAME_SCORE_FORMAT = "%s|%s";
 
 	private final Pins firstPins;
 	private final Pins secondPins;
