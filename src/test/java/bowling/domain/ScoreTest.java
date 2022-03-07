@@ -14,19 +14,19 @@ public class ScoreTest {
 
 	@Test
 	void 점수_최소보다_낮을시_예외처리() {
-		assertThatExceptionOfType(RuntimeException.class)
+		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> new Score(-1, 2));
 	}
 
 	@Test
 	void 점수_최대보다_높을경우_예외처리() {
-		assertThatExceptionOfType(RuntimeException.class)
+		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> new Score(301, 0));
 	}
 
 	@Test
 	void 최대점수_추가라운드_예외처리() {
-		assertThatExceptionOfType(RuntimeException.class)
+		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> new Score(300, 1));
 	}
 
