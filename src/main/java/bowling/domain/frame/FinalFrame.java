@@ -1,54 +1,61 @@
 package bowling.domain.frame;
 
 import bowling.domain.Pins;
+import bowling.domain.state.Miss;
+import bowling.domain.state.Spare;
+import bowling.domain.state.StartState;
+import bowling.domain.state.State;
+import bowling.domain.state.Strike;
+import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.stream.Collectors;
 
 public class FinalFrame implements Frame {
 
-	private static final int ROUND = 10;
-	private static final String EMPTY = "";
+	private static final String DELIMITER = "|";
+	private static final int MAXIMUM_COUNT = 3;
+	private static final int END_COUNT = 0;
 
-	private final Pins firstPin;
-	private final Pins secondPin;
-	private final Pins bonusPin;
+	private final Deque<State> states;
+	private final int count;
 
 	public FinalFrame() {
-		this(null, null, null);
+		this(new ArrayDeque<>(Collections.singletonList(new StartState())), MAXIMUM_COUNT);
 	}
 
-	public FinalFrame(Pins firstPin) {
-		this(firstPin, null, null);
-	}
-
-	public FinalFrame(Pins firstPin, Pins secondPin) {
-		this(firstPin, secondPin, null);
-	}
-
-	private FinalFrame(Pins firstPin, Pins secondPin, Pins bonusPin) {
-		this.firstPin = firstPin;
-		this.secondPin = secondPin;
-		this.bonusPin = bonusPin;
+	private FinalFrame(Deque<State> states, int count) {
+		this.states = states;
+		this.count = count;
 	}
 
 	@Override
 	public Frame bowling(int pins) {
-		if (firstPin == null) {
-			return new FinalFrame(Pins.hit(pins));
-		}
-
-		if (secondPin == null) {
-			return new FinalFrame(firstPin, firstPin.nextPins(pins));
-		}
-
 		if (hasGameEnd()) {
 			throw new RuntimeException("종료된 게임 입니다.");
 		}
 
-		return new FinalFrame(firstPin, secondPin, Pins.hit(pins));
+		if (hasNextStep()) {
+			states.addLast(new StartState());
+		}
+
+		State currentState = states.removeLast();
+		currentState = currentState.bowling(Pins.hit(pins));
+		states.addLast(currentState);
+
+		return new FinalFrame(states, count - 1);
 	}
 
 	@Override
 	public Frame nextFrame() {
 		throw new RuntimeException("마지막 프레임 입니다.");
+	}
+
+	@Override
+	public String frameScore() {
+		return states.stream()
+			.map(State::frameScore)
+			.collect(Collectors.joining(DELIMITER));
 	}
 
 	@Override
@@ -58,46 +65,21 @@ public class FinalFrame implements Frame {
 
 	@Override
 	public boolean hasGameEnd() {
-		if (bonusPin != null) {
+		State first = states.peekFirst();
+
+		if (first instanceof Miss) {
 			return true;
 		}
 
-		if (firstPin != null && firstPin.isStrike()) {
-			return false;
-		}
-
-		if (firstPin != null && secondPin != null) {
-			return !firstPin.isSpare(secondPin);
-		}
-
-		return false;
+		return hasMaxPins(first) && count == END_COUNT;
 	}
 
-	@Override
-	public String frameScore() {
-		if (firstPin != null && secondPin != null && bonusPin != null) {
-			StringBuilder sb = new StringBuilder();
-			if (firstPin.isSpare(secondPin)) {
-				sb.append(String.format("%d|/", firstPin.pins()));
-				if (bonusPin.isStrike()) {
-					sb.append("X");
-					return sb.toString();
-				}
-				sb.append(String.format("|%d", bonusPin.pins()));
-				return sb.toString();
-			}
-		}
+	private boolean hasMaxPins(State first) {
+		return first instanceof Strike || first instanceof Spare;
+	}
 
-
-		if (firstPin == null) {
-			return EMPTY;
-		}
-
-		if (firstPin.isStrike()) {
-			return "X";
-		}
-
-		return null;
+	private boolean hasNextStep() {
+		return hasMaxPins(this.states.peekLast()) && this.count > END_COUNT;
 	}
 
 }

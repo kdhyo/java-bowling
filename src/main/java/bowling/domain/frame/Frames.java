@@ -39,7 +39,14 @@ public class Frames {
 	}
 
 	public int currentRound() {
-		return frames.size();
+		int round = frames.size();
+		boolean next = frames.peekLast().isNext();
+
+		if (next) {
+			round++;
+		}
+
+		return round;
 	}
 
 	public List<Frame> getFrame() {
