@@ -16,6 +16,18 @@ public class Score {
 		this.bonusCount = bonusCount;
 	}
 
+	public boolean hasBonus() {
+		return bonusCount > MINIMUM_BONUS;
+	}
+
+	public Score addBonusScore(int currentScore) {
+		int bonusCount = this.bonusCount -1;
+		if (bonusCount < MINIMUM_BONUS) {
+			throw new RuntimeException("보너스 점수를 더할 수 없습니다.");
+		}
+		return new Score(this.currentScore + currentScore, bonusCount);
+	}
+
 	private void valid(int currentScore, int bonusCount) {
 		if (MINIMUM_SCORE > currentScore || currentScore > MAXIMUM_SCORE) {
 			throw new IllegalArgumentException(String.format("%d ~ %d 사이만 점수로 가능합니다.", MINIMUM_SCORE, MAXIMUM_SCORE));
