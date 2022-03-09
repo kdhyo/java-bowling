@@ -47,4 +47,12 @@ class BonusCountTest {
 			.isThrownBy(() -> new BonusCount(bonusCount));
 	}
 
+	@Test
+	void decrease_감소확인() {
+		BonusCount bonusCount = BonusCount.spare();
+		BonusCount decreaseCount = bonusCount.decrease();
+
+		assertThat(decreaseCount).isEqualTo(new BonusCount(0));
+	}
+
 }

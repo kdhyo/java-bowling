@@ -33,6 +33,10 @@ public class BonusCount {
 		return bonusCount > MINIMUM_COUNT;
 	}
 
+	public BonusCount decrease() {
+		return new BonusCount(this.bonusCount - 1);
+	}
+
 	private void valid(int bonusCount) {
 		if (MINIMUM_COUNT > bonusCount || bonusCount > MAXIMUM_COUNT) {
 			throw new IllegalArgumentException(String.format("보너스 횟수는 %d ~ %d 사이만 가능합니다.", MINIMUM_COUNT, MAXIMUM_COUNT));
