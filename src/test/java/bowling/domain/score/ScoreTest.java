@@ -34,13 +34,7 @@ public class ScoreTest {
 	@Test
 	void 점수_최대보다_높을경우_예외처리() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> new Score(301, 0));
-	}
-
-	@Test
-	void 최대점수_추가라운드_예외처리() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> new Score(300, 1));
+			.isThrownBy(() -> new Score(31, 0));
 	}
 
 }
