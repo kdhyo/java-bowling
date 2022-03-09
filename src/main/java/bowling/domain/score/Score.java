@@ -1,4 +1,4 @@
-package bowling.domain;
+package bowling.domain.score;
 
 public class Score {
 
@@ -21,7 +21,7 @@ public class Score {
 	}
 
 	public Score addBonusScore(int currentScore) {
-		int bonusCount = this.bonusCount -1;
+		int bonusCount = this.bonusCount - 1;
 		if (bonusCount < MINIMUM_BONUS) {
 			throw new RuntimeException("보너스 점수를 더할 수 없습니다.");
 		}
